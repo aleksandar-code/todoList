@@ -1,12 +1,13 @@
 class Todo {
-  constructor(title) {
+  constructor(title, project) {
     this.title = title;
+    this.project = project;
   }
 }
 
-const createTodo = (title) => {
-  const todo = new Todo(title);
+const createTodo = (title, project) => {
+  const todo = new Todo(title, project);
+  console.log(todo);
   return todo;
 };
-
-export default createTodo;
+export { createTodo };

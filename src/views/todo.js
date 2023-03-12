@@ -1,6 +1,6 @@
-const todoView = () => {
+const todoForm = () => {
   const formContainer = document.createElement("div");
-  const todoForm = document.createElement("form");
+  const form = document.createElement("form");
   const titleLabel = document.createElement("label");
   const titleInput = document.createElement("input");
   const submitBtn = document.createElement("button");
@@ -13,8 +13,15 @@ const todoView = () => {
   titleInput.name = "title";
   submitBtn.type = "submit";
   submitBtn.textContent = "Create todo";
-  todoForm.append(titleLabel, titleInput, submitBtn);
-  formContainer.appendChild(todoForm);
+  form.append(titleLabel, titleInput, submitBtn);
+  formContainer.appendChild(form);
   content.appendChild(formContainer);
 };
-export default todoView;
+
+const displayTodo = (todo) => {
+  const todoContainer = document.createElement("div");
+  todoContainer.innerHTML = `Project: ${todo.project.title} Todo: ${todo.title}`;
+  const content = document.getElementById("content");
+  content.appendChild(todoContainer);
+};
+export { todoForm, displayTodo };
