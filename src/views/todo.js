@@ -1,7 +1,20 @@
 const todoView = () => {
-  const text = document.createElement("div");
-  text.textContent = "hi";
+  const formContainer = document.createElement("div");
+  const todoForm = document.createElement("form");
+  const titleLabel = document.createElement("label");
+  const titleInput = document.createElement("input");
+  const submitBtn = document.createElement("button");
   const content = document.getElementById("content");
-  content.appendChild(text);
+  formContainer.setAttribute("class", "form-container");
+  titleLabel.for = "title";
+  titleLabel.textContent = "Title";
+  titleInput.type = "text";
+  titleInput.id = "title";
+  titleInput.name = "title";
+  submitBtn.type = "submit";
+  submitBtn.textContent = "Create todo";
+  todoForm.append(titleLabel, titleInput, submitBtn);
+  formContainer.appendChild(todoForm);
+  content.appendChild(formContainer);
 };
 export default todoView;

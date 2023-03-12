@@ -33,3 +33,16 @@ header nav button:hover {
   transform: scale(1.1);
   border: 2px solid purple;
 }
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button[type="submit"] {
+  background-color: red;
+  color: yellow;
+  font-weight: bold;
+}
