@@ -4,11 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: {
-    index: "src/index.js",
-    todo: "src/controllers/todo.js",
-    project: "src/controllers/project.js",
-  },
+  entry: "./src/index.js",
   devtool: "inline-source-map",
   plugins: [
     new HtmlWebpackPlugin({
@@ -28,7 +24,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: "[name].bundle.js",
+    filename: "index.bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },

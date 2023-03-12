@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+header nav {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+header nav button {
+  width: 120px;
+  height: 30px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2586f5;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header nav button:hover {
+  background-color: #0077ff;
+  cursor: pointer;
+  transform: scale(1.1);
+  border: 2px solid purple;
+}
