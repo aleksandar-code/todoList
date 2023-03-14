@@ -15,7 +15,6 @@
 form {
   height: 200px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -26,6 +25,11 @@ form label {
   font-size: 2rem;
 }
 
+form input {
+  height: 25px;
+  border-radius: 10px;
+}
+
 button[type="submit"] {
   background-color: red;
   color: yellow;
@@ -33,17 +37,4 @@ button[type="submit"] {
   height: 50px;
   width: 120px;
   font-size: 1.5rem;
-}
-
-.todo-container {
-  width: 200px;
-  height: 100px;
-  display: block;
-  background-color: rgb(47, 0, 255);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
 }
