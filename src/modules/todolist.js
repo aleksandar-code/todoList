@@ -29,4 +29,5 @@ class Todolist {
 
 const TodoList = new Todolist();
 TodoList.createProject("Default");
+TodoList.createProject("Other");
 export default TodoList;
