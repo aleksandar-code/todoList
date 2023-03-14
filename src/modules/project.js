@@ -14,7 +14,6 @@ class Project {
   }
 
   removeTodo(index) {
-    console.log(this.todoList.at(index));
     this.todoList.splice(index, 1);
   }
 

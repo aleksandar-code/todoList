@@ -7,7 +7,8 @@ class Todolist {
 
   createProject(title) {
     const index = this.projectList.length;
-    this.appendProject(new Project(title, index));
+    const project = new Project(title, index);
+    this.appendProject(project);
   }
 
   removeProject(index) {

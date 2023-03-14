@@ -12,8 +12,28 @@ const getProject = () => {
   return project;
 };
 
+const appendProjectOptions = () => {
+  const selection = document.getElementById("project-name");
+  selection.innerHTML = "";
+  const projectList = TodoList.getProjectList();
+
+  projectList.forEach((project) => {
+    const option = `<option data-project-index="${project.index}">${project.title}</option>`;
+    selection.innerHTML += option;
+  });
+  selection.lastChild.selected = true;
+  getProjectIndex.index = selection.lastChild.dataset.projectIndex;
+};
+
+const newProject = (name) => {
+  TodoList.createProject(name);
+  document.getElementById("todo-box").innerHTML = "";
+  appendProjectOptions();
+};
+
 const emptyForm = () => {
   document.getElementById("title").value = "";
+  document.getElementById("project-title").value = "";
 };
 
 const viewTodo = (todo) => {
@@ -42,16 +62,20 @@ const formIsComplete = () => {
   return true;
 };
 
+const getProjectValue = () => {
+  const title = document.getElementById("project-title").value;
+  return title;
+};
+
 const getTodoValues = () => {
   const title = document.getElementById("title").value;
-  const project = document.getElementById("project-name").textContent;
-  return [title, project];
+  return title;
 };
 
 const addToProject = (e) => {
-  const project = getProject();
-  project.createTodo(getTodoValues()[0], getTodoValues()[1]);
   e.preventDefault();
+  const project = getProject();
+  project.createTodo(getTodoValues());
 };
 
 const submitButton = document.querySelector("button[type=submit]");
@@ -67,6 +91,17 @@ const projectName = document.getElementById("project-name");
 projectName.onchange = (event) => {
   getProjectIndex.index =
     event.target.options[event.target.selectedIndex].dataset.projectIndex;
-
   viewProject();
 };
+
+const newProjectBtn = document.getElementById("new-project");
+
+newProjectBtn.addEventListener("click", (e) => {
+  const projectTitle = document.getElementById("project-title").value;
+  if (projectTitle !== "") {
+    const name = getProjectValue();
+    newProject(name);
+    e.preventDefault();
+    emptyForm();
+  }
+});
