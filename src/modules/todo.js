@@ -1,14 +1,9 @@
 class Todo {
-  constructor(title, project) {
+  constructor(title, project, index) {
     this.title = title;
     this.project = project;
+    this.index = index;
   }
 }
 
-const createTodo = (title, project) => {
-  const todo = new Todo(title, project);
-  return todo;
-};
-
-const modify = "dummy";
-export { createTodo, modify };
+export default Todo;

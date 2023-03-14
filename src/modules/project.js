@@ -1,13 +1,16 @@
-import * as todoModel from "./todo";
+import Todo from "./todo";
 
 class Project {
-  constructor(title) {
+  constructor(title, index) {
     this.title = title;
     this.todoList = [];
+    this.index = index;
   }
 
-  createTodo(title, project) {
-    this.appendTodo(todoModel.createTodo(title, project));
+  createTodo(title) {
+    const index = this.todoList.length;
+    const projectName = this.title;
+    this.appendTodo(new Todo(title, projectName, index));
   }
 
   removeTodo(index) {
@@ -19,11 +22,9 @@ class Project {
     this.todoList.push(todo);
   }
 
-  getList() {
+  getTodoList() {
     return this.todoList;
   }
 }
 
-const defaultProject = new Project("Default");
-
-export default defaultProject;
+export default Project;
