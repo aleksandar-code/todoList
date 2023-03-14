@@ -7,7 +7,8 @@ class Todo {
 
 const createTodo = (title, project) => {
   const todo = new Todo(title, project);
-  console.log(todo);
   return todo;
 };
-export { createTodo };
+
+const modify = "dummy";
+export { createTodo, modify };
