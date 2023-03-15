@@ -45,14 +45,19 @@ button[type="submit"] {
 
 .todo {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: rgb(142, 142, 240);
   color: white;
   height: auto;
-  width: 300px;
+  width: 350px;
   font-size: 1rem;
   padding: 10px;
   gap: 10px;
+}
+
+.todo span {
+  color: black;
+  font-weight: bold;
 }
 
 #todo-box {
@@ -67,6 +72,13 @@ button[type="submit"] {
 }
 
 .remove-todo {
+  background-color: red;
+  color: yellow;
+  font-weight: bold;
+  align-self: flex-start;
+}
+
+.details-todo {
   background-color: red;
   color: yellow;
   font-weight: bold;

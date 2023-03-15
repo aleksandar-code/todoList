@@ -32,6 +32,16 @@ class Project {
     return this.todoList;
   }
 
+  getTodoWithUuid(uuid) {
+    let result;
+    this.todoList.forEach((todo, index) => {
+      if (todo.getUuid() === uuid) {
+        result = this.todoList[index];
+      }
+    });
+    return result;
+  }
+
   getUuid() {
     return this.uuid;
   }

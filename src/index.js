@@ -54,17 +54,31 @@ const removeTodo = (uuid, htmlElement) => {
   console.log(project.getTodoList());
 };
 
+// const showTodoDetails = (uuid, htmlElement) => {
+//   const project = getProject();
+//   console.log(htmlElement.children);
+//   const todo = project.getTodoWithUuid(uuid);
+//   htmlElement.innerHTML += `<p>${todo.description}</p>`;
+// };
+
 const viewTodo = (todo) => {
   const element = document.createElement("div");
   const todoBox = document.getElementById("todo-box");
   element.classList.add("todo");
   element.dataset.todoUuid = todo.getUuid();
-  element.innerHTML = `<p>${todo.getTitle()}</p><p>${
+  element.innerHTML = `<span>Title</span><p>${todo.getTitle()}</p><span>Due date</span><p>${
     todo.dueDate
-  }</p><button class="remove-todo">Remove</button>`;
+  }</p><p>${todo.description}</p><button class="remove-todo">Remove</button>`;
+
   element.lastChild.onclick = (e) => {
     removeTodo(e.composedPath()[1].dataset.todoUuid, e.composedPath()[1]);
   };
+  // element.children[2].onclick = (e) => {
+  //   console.log("show details");
+  //   showTodoDetails(e.composedPath()[1].dataset.todoUuid, e.composedPath()[1]);
+  // };
+  // <button class='details-todo'>Details</button>
+
   todoBox.appendChild(element);
 };
 
