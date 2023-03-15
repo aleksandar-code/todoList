@@ -109,6 +109,12 @@ const addToProject = (e) => {
 
 const submitButton = document.querySelector("button[type=submit]");
 submitButton.addEventListener("click", (e) => {
+  const projectTitle = document.getElementById("project-title").value;
+  if (projectTitle !== "") {
+    const name = getProjectValue();
+    newProject(name);
+    e.preventDefault();
+  }
   if (formIsComplete() === true) {
     addToProject(e);
     viewProject();
@@ -124,15 +130,4 @@ projectName.onchange = (event) => {
   viewProject();
 };
 
-const newProjectBtn = document.getElementById("new-project");
-
-newProjectBtn.addEventListener("click", (e) => {
-  const projectTitle = document.getElementById("project-title").value;
-  if (projectTitle !== "") {
-    const name = getProjectValue();
-    newProject(name);
-    e.preventDefault();
-    emptyForm();
-  }
-});
 setDate();

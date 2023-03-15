@@ -72,3 +72,13 @@ button[type="submit"] {
   font-weight: bold;
   align-self: flex-start;
 }
+
+#midbar {
+  display: flex;
+  align-items: center;
+}
+
+#midbar h2 {
+  font-size: 2rem;
+  text-align: center;
+}

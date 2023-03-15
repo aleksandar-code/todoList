@@ -14,12 +14,8 @@
           type="text"
           id="project-title"
           name="project-title"
-          placeholder="Project Title"
-          required
+          placeholder="Project Title not required"
         />
-        <button id="new-project">New project</button>
-      </form>
-      <form action="" method="post">
         <label for="title">Todo title</label>
         <input
           type="text"
@@ -38,9 +34,12 @@
         />
         <button type="submit">Add todo</button>
       </form>
-      <select name="project-list" id="project-name">
-        <option data-project-uuid="">Default</option>
-      </select>
+      <div id="midbar">
+        <h2>Project:</h2>
+        <select name="project-list" id="project-name">
+          <option data-project-uuid="">Default</option>
+        </select>
+      </div>
       <div id="todo-box"></div>
     </div>
   </body>
