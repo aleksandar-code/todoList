@@ -1,10 +1,6 @@
 import "./index.css";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { nanoid } from "nanoid";
 import TodoList from "./modules/todolist";
 
-const userId = nanoid();
-console.log(userId);
 const getProjectIndex = (() => {
   const index = 0;
   return { index };

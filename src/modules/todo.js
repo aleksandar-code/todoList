@@ -1,12 +1,12 @@
 class Todo {
-  constructor(title, project, index) {
+  constructor(title, project, uuid) {
     this.title = title;
     this.project = project;
-    this.index = index;
+    this.uuid = uuid;
   }
 
-  getIndex() {
-    return this.index;
+  getUuid() {
+    return this.uuid;
   }
 
   getTitle() {

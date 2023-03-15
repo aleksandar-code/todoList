@@ -1,20 +1,25 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { nanoid } from "nanoid";
 import Todo from "./todo";
 
 class Project {
-  constructor(title, index) {
+  constructor(title, uuid) {
     this.title = title;
     this.todoList = [];
-    this.index = index;
+    this.uuid = uuid;
   }
 
   createTodo(title) {
-    const index = this.todoList.length;
     const projectName = this.title;
-    this.appendTodo(new Todo(title, projectName, index));
+    this.appendTodo(new Todo(title, projectName, nanoid()));
   }
 
-  removeTodo(index) {
-    this.todoList.splice(index, 1);
+  removeTodo(uuid) {
+    this.todoList.forEach((todo, index) => {
+      if (todo.getUuid() === uuid) {
+        this.todoList.splice(index, 1);
+      }
+    });
   }
 
   appendTodo(todo) {
@@ -23,6 +28,10 @@ class Project {
 
   getTodoList() {
     return this.todoList;
+  }
+
+  getUuid() {
+    return this.uuid;
   }
 }
 
