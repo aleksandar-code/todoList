@@ -1,6 +1,12 @@
 import "./index.css";
+import { format } from "date-fns";
 import TodoList from "./modules/todolist";
 
+const setDate = () => {
+  const date = document.querySelector("input[type=datetime-local]");
+  const today = format(new Date(), "yyyy-MM-dd--HH:mm");
+  date.value = today.replace("--", "T");
+};
 const getProjectUuid = (() => {
   const list = TodoList.getProjectList();
   document.querySelector("option").dataset.projectUuid = list[0].getUuid();
@@ -37,6 +43,8 @@ const newProject = (name) => {
 const emptyForm = () => {
   document.getElementById("title").value = "";
   document.getElementById("project-title").value = "";
+  document.getElementById("description").value = "";
+  setDate();
 };
 
 const removeTodo = (uuid, htmlElement) => {
@@ -51,7 +59,9 @@ const viewTodo = (todo) => {
   const todoBox = document.getElementById("todo-box");
   element.classList.add("todo");
   element.dataset.todoUuid = todo.getUuid();
-  element.innerHTML = `<p>${todo.getTitle()}</p> <button class="remove-todo">Remove</button>`;
+  element.innerHTML = `<p>${todo.getTitle()}</p><p>${
+    todo.dueDate
+  }</p><button class="remove-todo">Remove</button>`;
   element.lastChild.onclick = (e) => {
     removeTodo(e.composedPath()[1].dataset.todoUuid, e.composedPath()[1]);
   };
@@ -82,13 +92,19 @@ const getProjectValue = () => {
 
 const getTodoValues = () => {
   const title = document.getElementById("title").value;
-  return title;
+  const dueDate = document.querySelector("input[type=datetime-local]").value;
+  const description = document.getElementById("description").value;
+  return [title, dueDate, description];
 };
 
 const addToProject = (e) => {
   e.preventDefault();
   const project = getProject();
-  project.createTodo(getTodoValues());
+  project.createTodo(
+    getTodoValues()[0],
+    getTodoValues()[1],
+    getTodoValues()[2]
+  );
 };
 
 const submitButton = document.querySelector("button[type=submit]");
@@ -119,3 +135,4 @@ newProjectBtn.addEventListener("click", (e) => {
     emptyForm();
   }
 });
+setDate();

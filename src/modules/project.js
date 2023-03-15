@@ -9,9 +9,11 @@ class Project {
     this.uuid = uuid;
   }
 
-  createTodo(title) {
+  createTodo(title, dueDate, description) {
     const projectName = this.title;
-    this.appendTodo(new Todo(title, projectName, nanoid()));
+    this.appendTodo(
+      new Todo(title, projectName, dueDate, description, nanoid())
+    );
   }
 
   removeTodo(uuid) {
