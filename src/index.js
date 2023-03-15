@@ -1,6 +1,10 @@
 import "./index.css";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { nanoid } from "nanoid";
 import TodoList from "./modules/todolist";
 
+const userId = nanoid();
+console.log(userId);
 const getProjectIndex = (() => {
   const index = 0;
   return { index };
@@ -36,8 +40,12 @@ const emptyForm = () => {
   document.getElementById("project-title").value = "";
 };
 
-const removeTodo = (index) => {
+const removeTodo = (index, htmlElement) => {
   console.log(index);
+  htmlElement.remove();
+  const project = getProject();
+  project.removeTodo(index);
+  console.log(project.getTodoList());
 };
 
 const viewTodo = (todo) => {
@@ -48,7 +56,7 @@ const viewTodo = (todo) => {
   element.innerHTML = `<p>${todo.getTitle()}</p> <button class="remove-todo">Remove</button>`;
   console.log(element.lastChild);
   element.lastChild.onclick = (e) => {
-    removeTodo(e.composedPath()[1].dataset.todoIndex);
+    removeTodo(e.composedPath()[1].dataset.todoIndex, e.composedPath()[1]);
   };
   todoBox.appendChild(element);
 };
