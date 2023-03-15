@@ -19,6 +19,11 @@ form {
   align-items: center;
   gap: 10px;
   font-size: 1rem;
+  background-color: rgb(211, 99, 99);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 10px;
+  width: 220px;
 }
 
 button[type="submit"] {
