@@ -29,8 +29,9 @@ class Todolist {
   }
 
   getProjectWithUuid(uuid) {
-    let result;
-    for (let i; i < this.projectList.length; i += 1) {
+    let result = this.projectList[0].getUuid(); // problem
+    let i;
+    for (i = 0; i < this.projectList.length; i += 1) {
       if (this.projectList[i].getUuid() === uuid) {
         result = this.projectList[i];
       }

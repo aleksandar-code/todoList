@@ -1,14 +1,17 @@
 import "./index.css";
 import TodoList from "./modules/todolist";
 
-const getProjectIndex = (() => {
-  const index = 0;
-  return { index };
+const getProjectUuid = (() => {
+  const list = TodoList.getProjectList();
+  document.querySelector("option").dataset.projectUuid = list[0].getUuid();
+  const base = list[0].getUuid();
+  const uuid = base;
+  return { uuid };
 })();
 
 const getProject = () => {
-  const { index } = getProjectIndex;
-  const project = TodoList.getProjectWithIndex(index);
+  const { uuid } = getProjectUuid;
+  const project = TodoList.getProjectWithUuid(uuid);
   return project;
 };
 
@@ -18,11 +21,11 @@ const appendProjectOptions = () => {
   const projectList = TodoList.getProjectList();
 
   projectList.forEach((project) => {
-    const option = `<option data-project-index="${project.index}">${project.title}</option>`;
+    const option = `<option data-project-uuid="${project.uuid}">${project.title}</option>`;
     selection.innerHTML += option;
   });
   selection.lastChild.selected = true;
-  getProjectIndex.index = selection.lastChild.dataset.projectIndex;
+  getProjectUuid.uuid = selection.lastChild.dataset.projectUuid;
 };
 
 const newProject = (name) => {
@@ -36,11 +39,10 @@ const emptyForm = () => {
   document.getElementById("project-title").value = "";
 };
 
-const removeTodo = (index, htmlElement) => {
-  console.log(index);
+const removeTodo = (uuid, htmlElement) => {
   htmlElement.remove();
   const project = getProject();
-  project.removeTodo(index);
+  project.removeTodo(uuid);
   console.log(project.getTodoList());
 };
 
@@ -48,11 +50,10 @@ const viewTodo = (todo) => {
   const element = document.createElement("div");
   const todoBox = document.getElementById("todo-box");
   element.classList.add("todo");
-  element.dataset.todoIndex = todo.getIndex();
+  element.dataset.todoUuid = todo.getUuid();
   element.innerHTML = `<p>${todo.getTitle()}</p> <button class="remove-todo">Remove</button>`;
-  console.log(element.lastChild);
   element.lastChild.onclick = (e) => {
-    removeTodo(e.composedPath()[1].dataset.todoIndex, e.composedPath()[1]);
+    removeTodo(e.composedPath()[1].dataset.todoUuid, e.composedPath()[1]);
   };
   todoBox.appendChild(element);
 };
@@ -101,8 +102,9 @@ submitButton.addEventListener("click", (e) => {
 
 const projectName = document.getElementById("project-name");
 projectName.onchange = (event) => {
-  getProjectIndex.index =
-    event.target.options[event.target.selectedIndex].dataset.projectIndex;
+  getProjectUuid.uuid =
+    event.target.options[event.target.selectedIndex].dataset.projectUuid;
+
   viewProject();
 };
 
