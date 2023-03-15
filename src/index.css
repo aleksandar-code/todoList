@@ -17,35 +17,20 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   font-size: 1rem;
-}
-
-form label {
-  font-size: 2rem;
-}
-
-form input {
-  height: 25px;
-  border-radius: 10px;
 }
 
 button[type="submit"] {
   background-color: red;
   color: yellow;
   font-weight: bold;
-  height: 50px;
-  width: 120px;
-  font-size: 1.5rem;
 }
 
 #new-project {
   background-color: red;
   color: yellow;
   font-weight: bold;
-  height: 70px;
-  width: 120px;
-  font-size: 1.5rem;
 }
 
 #project-name {
@@ -57,10 +42,17 @@ button[type="submit"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   background-color: rgb(142, 142, 240);
-  font-size: 1.5rem;
   color: white;
   width: 300px;
   height: 100px;
+  position: relative;
+  font-size: 1rem;
+}
+
+.remove-todo {
+  background-color: red;
+  color: yellow;
+  position: absolute;
+  right: 10px;
 }

@@ -36,12 +36,20 @@ const emptyForm = () => {
   document.getElementById("project-title").value = "";
 };
 
+const removeTodo = (index) => {
+  console.log(index);
+};
+
 const viewTodo = (todo) => {
   const element = document.createElement("div");
   const todoBox = document.getElementById("todo-box");
   element.classList.add("todo");
   element.dataset.todoIndex = todo.getIndex();
-  element.textContent = todo.getTitle();
+  element.innerHTML = `<p>${todo.getTitle()}</p> <button class="remove-todo">Remove</button>`;
+  console.log(element.lastChild);
+  element.lastChild.onclick = (e) => {
+    removeTodo(e.composedPath()[1].dataset.todoIndex);
+  };
   todoBox.appendChild(element);
 };
 
