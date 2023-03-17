@@ -54,13 +54,6 @@ const removeTodo = (uuid, htmlElement) => {
   console.log(project.getTodoList());
 };
 
-// const showTodoDetails = (uuid, htmlElement) => {
-//   const project = getProject();
-//   console.log(htmlElement.children);
-//   const todo = project.getTodoWithUuid(uuid);
-//   htmlElement.innerHTML += `<p>${todo.description}</p>`;
-// };
-
 const viewTodo = (todo) => {
   const element = document.createElement("div");
   const todoBox = document.getElementById("todo-box");
@@ -68,16 +61,14 @@ const viewTodo = (todo) => {
   element.dataset.todoUuid = todo.getUuid();
   element.innerHTML = `<span>Title</span><p>${todo.getTitle()}</p><span>Due date</span><p>${
     todo.dueDate
-  }</p><p>${todo.description}</p><button class="remove-todo">Remove</button>`;
+  }</p><span>Priority</span><p>${todo.priority}</p><span>Description</span><p>${
+    todo.description
+  }</p><button class="edit-todo">Edit/Details</button><button class="remove-todo">Remove</button>`;
 
   element.lastChild.onclick = (e) => {
     removeTodo(e.composedPath()[1].dataset.todoUuid, e.composedPath()[1]);
   };
-  // element.children[2].onclick = (e) => {
-  //   console.log("show details");
-  //   showTodoDetails(e.composedPath()[1].dataset.todoUuid, e.composedPath()[1]);
-  // };
-  // <button class='details-todo'>Details</button>
+  // element.children[8] expand todo here
 
   todoBox.appendChild(element);
 };
@@ -89,6 +80,7 @@ const viewProject = () => {
   todos.forEach((todo) => {
     viewTodo(todo);
   });
+  console.log(project);
 };
 
 const formIsComplete = () => {
@@ -108,7 +100,8 @@ const getTodoValues = () => {
   const title = document.getElementById("title").value;
   const dueDate = document.querySelector("input[type=datetime-local]").value;
   const description = document.getElementById("description").value;
-  return [title, dueDate, description];
+  const priority = document.getElementById("priority").value;
+  return [title, dueDate, description, priority];
 };
 
 const addToProject = (e) => {
@@ -117,7 +110,8 @@ const addToProject = (e) => {
   project.createTodo(
     getTodoValues()[0],
     getTodoValues()[1],
-    getTodoValues()[2]
+    getTodoValues()[2],
+    getTodoValues()[3]
   );
 };
 
@@ -132,8 +126,8 @@ submitButton.addEventListener("click", (e) => {
   if (formIsComplete() === true) {
     addToProject(e);
     viewProject();
-    emptyForm();
   }
+  emptyForm();
 });
 
 const projectName = document.getElementById("project-name");

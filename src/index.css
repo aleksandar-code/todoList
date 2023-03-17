@@ -82,7 +82,7 @@ button[type="submit"] {
   align-self: flex-start;
 }
 
-.details-todo {
+.edit-todo {
   background-color: red;
   color: yellow;
   font-weight: bold;
