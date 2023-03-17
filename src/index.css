@@ -28,9 +28,19 @@ form {
   font-weight: bold;
   padding: 10px;
   width: 220px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 button[type="submit"] {
+  background-color: red;
+  color: yellow;
+  font-weight: bold;
+}
+
+#close-form {
   background-color: red;
   color: yellow;
   font-weight: bold;
@@ -97,4 +107,10 @@ button[type="submit"] {
 #midbar h2 {
   font-size: 2rem;
   text-align: center;
+}
+
+#show-form {
+  font-size: 1.3rem;
+  padding: 20px;
+  font-weight: bold;
 }

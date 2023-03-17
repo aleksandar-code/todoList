@@ -7,6 +7,31 @@ const setDate = () => {
   const today = format(new Date(), "yyyy-MM-dd--HH:mm");
   date.value = today.replace("--", "T");
 };
+const myForm = document.querySelector("form");
+
+const hideTodoBox = () => {
+  const todoBox = document.getElementById("todo-box");
+  todoBox.style.display = "none";
+};
+
+const showTodoBox = () => {
+  const todoBox = document.getElementById("todo-box");
+  todoBox.style.display = "flex";
+};
+
+const hideForm = () => {
+  myForm.style.display = "none";
+  document.getElementById("show-form").style.display = "block";
+  showTodoBox();
+};
+
+const showFormBtn = document.getElementById("show-form");
+showFormBtn.addEventListener("click", () => {
+  myForm.style.display = "flex";
+  document.getElementById("show-form").style.display = "none";
+  hideTodoBox();
+});
+
 const getProjectUuid = (() => {
   const list = TodoList.getProjectList();
   document.querySelector("option").dataset.projectUuid = list[0].getUuid();
@@ -130,6 +155,13 @@ submitButton.addEventListener("click", (e) => {
   emptyForm();
 });
 
+const closeFormButton = document.getElementById("close-form");
+
+closeFormButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  hideForm();
+});
+
 const projectName = document.getElementById("project-name");
 projectName.onchange = (event) => {
   getProjectUuid.uuid =
@@ -139,3 +171,5 @@ projectName.onchange = (event) => {
 };
 
 setDate();
+
+myForm.style.display = "none";
