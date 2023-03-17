@@ -9,9 +9,77 @@ const setDate = () => {
 };
 const myForm = document.querySelector("form");
 
+const getProjectUuid = (() => {
+  const list = TodoList.getProjectList();
+  document.querySelector("option").dataset.projectUuid = list[0].getUuid();
+  const base = list[0].getUuid();
+  const uuid = base;
+  return { uuid };
+})();
+
+const getProject = () => {
+  const { uuid } = getProjectUuid;
+  const project = TodoList.getProjectWithUuid(uuid);
+  return project;
+};
 const hideTodoBox = () => {
   const todoBox = document.getElementById("todo-box");
   todoBox.style.display = "none";
+};
+
+const editTodo = (uuid) => {
+  // change all info about a todo
+  const project = getProject();
+  const myTodo = project.getTodoWithUuid(uuid);
+  const editForm = document.createElement("div");
+  editForm.setAttribute("id", "edit-form");
+  document.body.appendChild(editForm);
+  console.log(
+    myTodo.project,
+    myTodo.title,
+    myTodo.priority,
+    myTodo.dueDate,
+    myTodo.description,
+    myTodo.uuid
+  );
+  editForm.innerHTML = `<form action="" method="post">
+  <label for="project-title-edit">Project title</label>
+  <input
+    type="text"
+    id="project-title-edit"
+    name="project-title-edit"
+    placeholder="Project Title not required"
+    value="${myTodo.project}"
+  />
+  <label for="title-edit">Todo title</label>
+  <input
+    type="text"
+    id="title-edit"
+    name="title-edit"
+    placeholder="Todo Title"
+    value="${myTodo.title}"
+    required
+  />
+  <label for="priority-edit">Priority</label>
+  <select name="priority-edit" id="priority-edit">
+    <option value="not important">Not important</option>
+    <option value="not urgent">Not urgent</option>
+    <option value="important">Important</option>
+    <option value="urgent">Urgent</option>
+  </select>
+  <label for="due-date">Due date</label>
+  <input type="datetime-local" value="${myTodo.dueDate}" />
+  <label for="description-edit">Description</label>
+  <input
+    type="text"
+    id="description-edit"
+    name="description-edit"
+    placeholder="Todo Description"
+    value="${myTodo.description}"
+  />
+  <button id="submit-edit">Edit todo</button>
+  <button id="cancel-edit">Cancel</button>
+</form>`;
 };
 
 const showTodoBox = () => {
@@ -31,20 +99,6 @@ showFormBtn.addEventListener("click", () => {
   document.getElementById("show-form").style.display = "none";
   hideTodoBox();
 });
-
-const getProjectUuid = (() => {
-  const list = TodoList.getProjectList();
-  document.querySelector("option").dataset.projectUuid = list[0].getUuid();
-  const base = list[0].getUuid();
-  const uuid = base;
-  return { uuid };
-})();
-
-const getProject = () => {
-  const { uuid } = getProjectUuid;
-  const project = TodoList.getProjectWithUuid(uuid);
-  return project;
-};
 
 const appendProjectOptions = () => {
   const selection = document.getElementById("project-name");
@@ -93,7 +147,10 @@ const viewTodo = (todo) => {
   element.lastChild.onclick = (e) => {
     removeTodo(e.composedPath()[1].dataset.todoUuid, e.composedPath()[1]);
   };
-  // element.children[8] expand todo here
+  element.children[8].onclick = (e) => {
+    console.log(`edit ${e.composedPath()[1].dataset.todoUuid}`);
+    editTodo(e.composedPath()[1].dataset.todoUuid);
+  };
 
   todoBox.appendChild(element);
 };

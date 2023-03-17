@@ -69,6 +69,10 @@ button[type="submit"] {
   gap: 10px;
 }
 
+.todo p {
+  display: block;
+}
+
 .todo span {
   color: black;
   font-weight: bold;
