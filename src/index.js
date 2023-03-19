@@ -7,7 +7,7 @@ const setDate = () => {
   const today = format(new Date(), "yyyy-MM-dd--HH:mm");
   date.value = today.replace("--", "T");
 };
-const myForm = document.querySelector("form");
+const myForm = document.getElementById("creation-form");
 
 const getProjectUuid = (() => {
   const list = TodoList.getProjectList();
@@ -30,7 +30,13 @@ const createEditForm = (uuid) => {
   editForm.setAttribute("id", "edit-form");
   document.body.appendChild(editForm);
 
-  editForm.innerHTML = `<form>
+  const form = document.createElement("form");
+
+  form.id = "edit-form";
+  form.action = "";
+  form.method = "post";
+  editForm.appendChild(form);
+  form.innerHTML += `
   <label for="title-edit">Todo title</label>
   <input
     type="text"
@@ -59,7 +65,7 @@ const createEditForm = (uuid) => {
   />
   <button id="submit-edit">Edit todo</button>
   <button id="cancel-edit">Cancel</button>
-</form>`;
+`;
 };
 
 const showTodoBox = () => {
@@ -117,19 +123,20 @@ const editTodo = (uuid) => {
   addEditListener(uuid);
   hideTodoBox();
 };
-
 // up there edit functionality
 
 const hideForm = () => {
   myForm.style.display = "none";
-  document.getElementById("show-form").style.display = "block";
+  document.getElementById("show-form").style.pointerEvents = "all";
+  document.getElementById("show-form").style.backgroundColor = "green";
   showTodoBox();
 };
 
 const showFormBtn = document.getElementById("show-form");
 showFormBtn.addEventListener("click", () => {
   myForm.style.display = "flex";
-  document.getElementById("show-form").style.display = "none";
+  document.getElementById("show-form").style.pointerEvents = "none";
+  document.getElementById("show-form").style.backgroundColor = "red";
   hideTodoBox();
 });
 
@@ -163,7 +170,6 @@ const removeTodo = (uuid, htmlElement) => {
   htmlElement.remove();
   const project = getProject();
   project.removeTodo(uuid);
-  console.log(project.getTodoList());
 };
 
 const viewTodo = (todo) => {
@@ -181,7 +187,6 @@ const viewTodo = (todo) => {
     removeTodo(e.composedPath()[1].dataset.todoUuid, e.composedPath()[1]);
   };
   element.children[8].onclick = (e) => {
-    console.log(`edit ${e.composedPath()[1].dataset.todoUuid}`);
     editTodo(e.composedPath()[1].dataset.todoUuid);
   };
 
@@ -258,6 +263,21 @@ projectName.onchange = (event) => {
 
   viewProject();
 };
+
+const p = document.createElement("p");
+p.textContent =
+  "You can add a todo to whatever project you've previously created using the selector (set on Project: Default). You can create your projects and todos, and both at the same time works! You can select any project and view all the todos you've created for it, you can remove todos and edit them.";
+const content = document.getElementById("content");
+content.appendChild(p);
+p.style.display = "none";
+
+const moreInfo = document.getElementById("more-info");
+moreInfo.addEventListener("click", () => {
+  p.style.display = "block";
+  setTimeout(() => {
+    p.style.display = "none";
+  }, 10000);
+});
 
 setDate();
 
