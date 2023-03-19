@@ -22,35 +22,15 @@ const getProject = () => {
   const project = TodoList.getProjectWithUuid(uuid);
   return project;
 };
-const hideTodoBox = () => {
-  const todoBox = document.getElementById("todo-box");
-  todoBox.style.display = "none";
-};
 
-const editTodo = (uuid) => {
-  // change all info about a todo
+const createEditForm = (uuid) => {
   const project = getProject();
   const myTodo = project.getTodoWithUuid(uuid);
   const editForm = document.createElement("div");
   editForm.setAttribute("id", "edit-form");
   document.body.appendChild(editForm);
-  console.log(
-    myTodo.project,
-    myTodo.title,
-    myTodo.priority,
-    myTodo.dueDate,
-    myTodo.description,
-    myTodo.uuid
-  );
-  editForm.innerHTML = `<form action="" method="post">
-  <label for="project-title-edit">Project title</label>
-  <input
-    type="text"
-    id="project-title-edit"
-    name="project-title-edit"
-    placeholder="Project Title not required"
-    value="${myTodo.project}"
-  />
+
+  editForm.innerHTML = `<form>
   <label for="title-edit">Todo title</label>
   <input
     type="text"
@@ -68,7 +48,7 @@ const editTodo = (uuid) => {
     <option value="urgent">Urgent</option>
   </select>
   <label for="due-date">Due date</label>
-  <input type="datetime-local" value="${myTodo.dueDate}" />
+  <input id="due-date-edit" type="datetime-local" value="${myTodo.dueDate}" />
   <label for="description-edit">Description</label>
   <input
     type="text"
@@ -86,6 +66,59 @@ const showTodoBox = () => {
   const todoBox = document.getElementById("todo-box");
   todoBox.style.display = "flex";
 };
+
+const hideTodoBox = () => {
+  const todoBox = document.getElementById("todo-box");
+  todoBox.style.display = "none";
+};
+
+const removeEditForm = () => {
+  document.getElementById("edit-form").remove();
+};
+
+let viewProject;
+
+const editValues = (uuid) => {
+  const title = document.getElementById("title-edit").value;
+  const priority = document.getElementById("priority-edit").value;
+  const dueDate = document.getElementById("due-date-edit").value;
+  const description = document.getElementById("description-edit").value;
+
+  const project = getProject();
+  const myTodo = project.getTodoWithUuid(uuid);
+
+  myTodo.title = title;
+  myTodo.priority = priority;
+  myTodo.dueDate = dueDate;
+  myTodo.description = description;
+};
+
+const addEditListener = (uuid) => {
+  const cancelEditBtn = document.getElementById("cancel-edit");
+  const submitEditBtn = document.getElementById("submit-edit");
+
+  cancelEditBtn.onclick = (e) => {
+    e.preventDefault();
+    removeEditForm();
+    showTodoBox();
+  };
+
+  submitEditBtn.onclick = (e) => {
+    e.preventDefault();
+    editValues(uuid);
+    removeEditForm();
+    showTodoBox();
+    viewProject();
+  };
+};
+
+const editTodo = (uuid) => {
+  createEditForm(uuid);
+  addEditListener(uuid);
+  hideTodoBox();
+};
+
+// up there edit functionality
 
 const hideForm = () => {
   myForm.style.display = "none";
@@ -155,14 +188,13 @@ const viewTodo = (todo) => {
   todoBox.appendChild(element);
 };
 
-const viewProject = () => {
+viewProject = () => {
   document.getElementById("todo-box").innerHTML = "";
   const project = getProject();
   const todos = project.getTodoList();
   todos.forEach((todo) => {
     viewTodo(todo);
   });
-  console.log(project);
 };
 
 const formIsComplete = () => {
