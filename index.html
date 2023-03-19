@@ -8,8 +8,11 @@
   <script defer src="index.bundle.js"></script></head>
   <body>
     <div id="content">
-      <button id="show-form">Create Todo/Project</button>
-      <form action="" method="post">
+      <header>
+        <button id="show-form">Create Todo/Project</button>
+        <div id="more-info">&#9432;</div>
+      </header>
+      <form id="creation-form" action="" method="post">
         <label for="project-title">Project title</label>
         <input
           type="text"
@@ -41,8 +44,8 @@
           name="description"
           placeholder="Todo Description"
         />
-        <button type="submit">Add todo</button>
-        <button id="close-form">Close</button>
+        <button type="submit">Submit</button>
+        <button id="close-form">Cancel</button>
       </form>
       <div id="midbar">
         <h2>Project:</h2>
