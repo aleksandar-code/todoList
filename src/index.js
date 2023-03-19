@@ -107,6 +107,7 @@ const addEditListener = (uuid) => {
     e.preventDefault();
     removeEditForm();
     showTodoBox();
+    document.getElementById("project-name").style.pointerEvents = "all";
   };
 
   submitEditBtn.onclick = (e) => {
@@ -115,10 +116,12 @@ const addEditListener = (uuid) => {
     removeEditForm();
     showTodoBox();
     viewProject();
+    document.getElementById("project-name").style.pointerEvents = "all";
   };
 };
 
 const editTodo = (uuid) => {
+  document.getElementById("project-name").style.pointerEvents = "none";
   createEditForm(uuid);
   addEditListener(uuid);
   hideTodoBox();
