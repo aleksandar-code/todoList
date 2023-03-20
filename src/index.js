@@ -1,6 +1,12 @@
 import "./index.css";
 import { format } from "date-fns";
 import TodoList from "./modules/todolist";
+import checkStorageAvailability from "./modules/storage";
+
+window.onload = () => {
+  checkStorageAvailability();
+  console.log("load");
+};
 
 const setDate = () => {
   const date = document.querySelector("input[type=datetime-local]");

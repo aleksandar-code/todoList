@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { nanoid } from "nanoid";
 import Todo from "./todo";
+import checkStorageAvailability from "./storage";
 
 class Project {
   constructor(title, uuid) {
@@ -9,11 +10,22 @@ class Project {
     this.uuid = uuid;
   }
 
+  // add edit manipulation here
+
   createTodo(title, dueDate, description, priority) {
     const projectName = this.title;
-    this.appendTodo(
-      new Todo(title, projectName, dueDate, description, priority, nanoid())
+    const myTodo = new Todo(
+      title,
+      projectName,
+      dueDate,
+      description,
+      priority,
+      nanoid()
     );
+    this.appendTodo(myTodo);
+
+    // store
+    checkStorageAvailability(myTodo);
   }
 
   removeTodo(uuid) {
