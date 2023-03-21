@@ -6,9 +6,6 @@ import Todo from "./todo";
 class Todolist {
   constructor() {
     this.projectList = [];
-    // setInterval(() => {
-    //   console.log(this);
-    // }, 1000);
   }
 
   // add edit manipulation here
@@ -26,17 +23,13 @@ class Todolist {
       this.projectList.push(newProject);
     });
 
-    console.log(this.projectList);
-
     this.projectList.forEach((element) => {
       if (!(element.todoList === undefined)) {
         const todos = element.todoList;
         element.emptyTodoList();
         todos.forEach((todo) => {
           const newTodo = Object.assign(new Todo(), todo);
-          console.log(newTodo, "i");
           element.appendTodo(newTodo);
-          console.log(element);
         });
       }
     });

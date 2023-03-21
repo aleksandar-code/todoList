@@ -26,7 +26,6 @@ if (checkStorageAvailability() === true) {
 }
 
 window.onchange = () => {
-  console.log("hi");
   if (checkStorageAvailability() === true) {
     setTimeout(() => {
       storageType(TodoList);
@@ -317,3 +316,7 @@ moreInfo.addEventListener("click", () => {
 setDate();
 
 myForm.style.display = "none";
+
+window.onload = () => {
+  viewProject();
+};
