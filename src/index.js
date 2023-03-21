@@ -116,6 +116,7 @@ const createProjectCard = (project) => {
   const removeBtn = document.createElement("button");
   removeBtn.setAttribute("class", "remove-project");
   removeBtn.textContent = "Remove";
+  element.dataset.projectUuid = project.uuid;
   element.appendChild(removeBtn);
   return element;
 };
@@ -133,25 +134,48 @@ const createProjectsBox = () => {
     projectBox.appendChild(card);
   });
 };
-// .remove-project
+let hideForm;
+
+const removeProject = (uuid) => {
+  TodoList.removeProject(uuid);
+  console.log(TodoList);
+  triggerLocalStorage(TodoList);
+};
+
+const addRemoveProjectListener = () => {
+  const removeBtns = document.querySelectorAll(".remove-project");
+  for (let i = 0; i < removeBtns.length; i += 1) {
+    removeBtns[i].onclick = (e) => {
+      console.log(e.composedPath()[1].dataset.projectUuid);
+      removeProject(e.composedPath()[1].dataset.projectUuid);
+    };
+  }
+};
+
 const projectsBtn = document.getElementById("show-projects");
 projectsBtn.addEventListener("click", () => {
-  hideTodoBox();
   createProjectsBox();
   document.getElementById("show-projects").style.pointerEvents = "none";
   document.getElementById("midbar").style.display = "none";
-  document.getElementById("todo-box").remove();
-  document.getElementById("creation-form").remove();
+  hideForm();
+  hideTodoBox();
+  addRemoveProjectListener();
 });
 
 const hideProjects = () => {
   document.getElementById("show-projects").style.pointerEvents = "all";
   document.getElementById("midbar").style.display = "flex";
+
   if (document.getElementById("project-box")) {
     document.getElementById("project-box").remove();
   }
 };
 
+const todosBtn = document.getElementById("show-todos");
+todosBtn.addEventListener("click", () => {
+  hideProjects();
+  hideForm();
+});
 const removeEditForm = () => {
   document.getElementById("edit-form").remove();
 };
@@ -203,7 +227,7 @@ const editTodo = (uuid) => {
 };
 // up there edit functionality
 
-const hideForm = () => {
+hideForm = () => {
   myForm.style.display = "none";
   document.getElementById("show-form").style.pointerEvents = "all";
   document.getElementById("show-form").style.backgroundColor = "green";
@@ -214,7 +238,6 @@ const showFormBtn = document.getElementById("show-form");
 showFormBtn.addEventListener("click", () => {
   myForm.style.display = "flex";
   document.getElementById("show-form").style.pointerEvents = "none";
-  document.getElementById("show-form").style.backgroundColor = "red";
   hideTodoBox();
   hideProjects();
 });
