@@ -107,6 +107,39 @@ const hideTodoBox = () => {
   todoBox.style.display = "none";
 };
 
+const createProjectCard = (project) => {
+  const element = document.createElement("div");
+  element.setAttribute("class", "project-card");
+  const title = document.createElement("h3");
+  title.textContent = project.title;
+  element.appendChild(title);
+  const removeBtn = document.createElement("button");
+  removeBtn.setAttribute("class", "remove-project");
+  removeBtn.textContent = "Remove";
+  element.appendChild(removeBtn);
+  return element;
+};
+
+const createProjectsBox = () => {
+  const projectBox = document.createElement("div");
+  projectBox.setAttribute("id", "project-box");
+  const h2 = document.createElement("h2");
+  h2.textContent = "Projects";
+  projectBox.appendChild(h2);
+  document.getElementById("content").appendChild(projectBox);
+  const projectList = TodoList.getProjectList();
+  projectList.forEach((project) => {
+    const card = createProjectCard(project);
+    projectBox.appendChild(card);
+  });
+};
+
+const projectsBtn = document.getElementById("show-projects");
+projectsBtn.addEventListener("click", () => {
+  hideTodoBox();
+  createProjectsBox();
+});
+
 const removeEditForm = () => {
   document.getElementById("edit-form").remove();
 };
