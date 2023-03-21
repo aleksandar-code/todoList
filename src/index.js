@@ -152,10 +152,6 @@ const hideProjects = () => {
   }
 };
 
-const creationForm = document.getElementById("show-form");
-
-const todos = document.getElementById("show-todos");
-
 const removeEditForm = () => {
   document.getElementById("edit-form").remove();
 };
