@@ -18,6 +18,7 @@ body {
 
 header {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -147,4 +148,14 @@ button {
 
 #info {
   padding: 10px;
+}
+
+#show-projects {
+  font-size: 1.3rem;
+  padding: 20px;
+  font-weight: bold;
+  background-color: green;
+  color: white;
+  border-radius: 10px;
+  border: 1px solid black;
 }

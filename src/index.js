@@ -306,7 +306,7 @@ moreInfo.addEventListener("click", () => {
   p.style.display = "block";
   setTimeout(() => {
     p.style.display = "none";
-  }, 10000);
+  }, 30000);
 });
 
 setDate();
