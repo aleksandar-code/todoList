@@ -144,3 +144,7 @@ button {
   border-radius: 10px;
   border: 1px solid black;
 }
+
+#info {
+  padding: 10px;
+}

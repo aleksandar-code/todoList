@@ -25,11 +25,15 @@ if (checkStorageAvailability() === true) {
   }
 }
 
+document.getElementById("todo-box").onclick = () => {
+  if (checkStorageAvailability() === true) {
+    storageType(TodoList);
+  }
+};
+
 window.onchange = () => {
   if (checkStorageAvailability() === true) {
-    setTimeout(() => {
-      storageType(TodoList);
-    }, 1000);
+    storageType(TodoList);
   }
 };
 
@@ -298,15 +302,9 @@ projectName.onchange = (event) => {
   viewProject();
 };
 
-const p = document.createElement("p");
-p.textContent =
-  "You can add a todo to whatever project you've previously created using the selector (set on Project: Default). You can create your projects and todos, and both at the same time works! You can select any project and view all the todos you've created for it, you can remove todos and edit them.";
-const content = document.getElementById("content");
-content.appendChild(p);
-p.style.display = "none";
-
 const moreInfo = document.getElementById("more-info");
 moreInfo.addEventListener("click", () => {
+  const p = document.getElementById("info");
   p.style.display = "block";
   setTimeout(() => {
     p.style.display = "none";
