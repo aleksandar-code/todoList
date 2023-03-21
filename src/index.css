@@ -48,7 +48,7 @@ form {
   padding: 10px;
   width: 220px;
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -194,4 +194,14 @@ button {
   font-weight: bold;
   width: 120px;
   padding: 10px;
+}
+
+#show-todos {
+  font-size: 1.3rem;
+  padding: 20px;
+  font-weight: bold;
+  background-color: green;
+  color: white;
+  border-radius: 10px;
+  border: 1px solid black;
 }

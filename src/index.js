@@ -133,12 +133,28 @@ const createProjectsBox = () => {
     projectBox.appendChild(card);
   });
 };
-
+// .remove-project
 const projectsBtn = document.getElementById("show-projects");
 projectsBtn.addEventListener("click", () => {
   hideTodoBox();
   createProjectsBox();
+  document.getElementById("show-projects").style.pointerEvents = "none";
+  document.getElementById("midbar").style.display = "none";
+  document.getElementById("todo-box").remove();
+  document.getElementById("creation-form").remove();
 });
+
+const hideProjects = () => {
+  document.getElementById("show-projects").style.pointerEvents = "all";
+  document.getElementById("midbar").style.display = "flex";
+  if (document.getElementById("project-box")) {
+    document.getElementById("project-box").remove();
+  }
+};
+
+const creationForm = document.getElementById("show-form");
+
+const todos = document.getElementById("show-todos");
 
 const removeEditForm = () => {
   document.getElementById("edit-form").remove();
@@ -204,6 +220,7 @@ showFormBtn.addEventListener("click", () => {
   document.getElementById("show-form").style.pointerEvents = "none";
   document.getElementById("show-form").style.backgroundColor = "red";
   hideTodoBox();
+  hideProjects();
 });
 
 const appendProjectOptions = () => {
