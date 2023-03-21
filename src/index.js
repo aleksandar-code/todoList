@@ -282,6 +282,7 @@ submitButton.addEventListener("click", (e) => {
   }
   emptyForm();
   triggerLocalStorage();
+  hideForm();
 });
 
 const closeFormButton = document.getElementById("close-form");
