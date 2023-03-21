@@ -1,7 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { nanoid } from "nanoid";
+// eslint-disable-next-line import/no-cycle
 import Project from "./project";
-import checkStorageAvailability from "./storage";
+import Todo from "./todo";
+// import { checkStorageAvailability, storageType } from "./storage";
 
 class Todolist {
   constructor() {
@@ -13,9 +15,27 @@ class Todolist {
   createProject(title) {
     const project = new Project(title, nanoid());
     this.appendProject(project);
+  }
 
-    // store
-    checkStorageAvailability(project);
+  setStorage(todolist) {
+    this.projectList = [];
+    console.log(JSON.parse(todolist));
+    const projects = JSON.parse(todolist);
+    projects.projectList.forEach((element) => {
+      const newProject = Object.assign(new Project(), element);
+      this.projectList.push(newProject);
+    });
+
+    console.log(this.projectList);
+
+    this.projectList.forEach((element) => {
+      if (!(element.TodoList === undefined)) {
+        element.TodoList.forEach((todo) => {
+          const newTodo = Object.assign(new Todo(), todo);
+          element.appendTodo(newTodo);
+        });
+      }
+    });
   }
 
   removeProject(uuid) {
@@ -47,5 +67,7 @@ class Todolist {
 }
 
 const TodoList = new Todolist();
-TodoList.createProject("Default");
+// TodoList.createProject("Default");
+const defaultProject = new Project("Default", "Default");
+TodoList.appendProject(defaultProject);
 export default TodoList;

@@ -1,7 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { nanoid } from "nanoid";
 import Todo from "./todo";
-import checkStorageAvailability from "./storage";
+// eslint-disable-next-line import/no-cycle
+import TodoList from "./todolist";
+import { checkStorageAvailability, storageType } from "./storage";
 
 class Project {
   constructor(title, uuid) {
@@ -25,7 +27,9 @@ class Project {
     this.appendTodo(myTodo);
 
     // store
-    checkStorageAvailability(myTodo);
+    if (checkStorageAvailability() === true) {
+      storageType.call(this, TodoList);
+    }
   }
 
   removeTodo(uuid) {

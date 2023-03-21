@@ -1,11 +1,20 @@
 import "./index.css";
 import { format } from "date-fns";
 import TodoList from "./modules/todolist";
-import checkStorageAvailability from "./modules/storage";
+import { checkStorageAvailability, storageType } from "./modules/storage";
 
-window.onload = () => {
-  checkStorageAvailability();
-  console.log("load");
+function setLocalStorage() {
+  TodoList.setStorage(storageType());
+}
+
+if (checkStorageAvailability() === true) {
+  setLocalStorage();
+}
+
+window.onchange = () => {
+  if (checkStorageAvailability() === true) {
+    storageType(TodoList);
+  }
 };
 
 const setDate = () => {

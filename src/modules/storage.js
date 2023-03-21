@@ -26,37 +26,47 @@ function storageAvailable(type) {
 }
 
 function populateStorage(element) {
-  console.log(element.constructor.name);
-  if (element.constructor.name === "Project") {
-    console.log(element);
-  } else if (element.constructor.name === "Todo") {
-    console.log(element);
-  }
+  localStorage.setItem("Todolist", JSON.stringify(element));
+  // const projects = element.projectList;
+
+  // projects.forEach((project, index) => {
+  //   const value = JSON.stringify(project);
+  //   const key = JSON.stringify(index);
+  //   localStorage.setItem(key, value);
+  //   const todos = project.todoList;
+  //   todos.forEach((todo, todoIndex) => {
+  //     const valueTodo = JSON.stringify(todo);
+  //     const keyTodo = JSON.stringify(todoIndex);
+  //     localStorage.setItem(keyTodo, valueTodo);
+  //   });
+  // });
 }
 
 function setStorage() {
   // how to use the local storage?
+
+  const item = localStorage.getItem("Todolist");
+  return item;
 }
 
-function useStorage(element) {
+function storageType(element = null) {
+  let toReturn;
   if (!(Storage.length || element == null)) {
     populateStorage(element);
   } else {
-    setStorage();
+    toReturn = setStorage();
   }
+  return toReturn;
 }
 
-function checkStorageAvailability(element = null) {
-  if (storageAvailable("localStorage")) {
-    // Yippee! We can use localStorage awesomeness
-    useStorage(element);
-  } else {
-    // Too bad, no localStorage for us
-    console.log("no storage :/");
+function checkStorageAvailability() {
+  if (storageAvailable("localStorage") === true) {
+    return true;
   }
+  return false;
 }
 
-export default checkStorageAvailability;
+export { checkStorageAvailability, storageType };
 
 // add edit manipulations to the modules and do not do them in index.js
 // decide how to change the data in storage and how to store it
