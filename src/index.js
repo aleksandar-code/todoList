@@ -7,13 +7,30 @@ function setLocalStorage() {
   TodoList.setStorage(storageType());
 }
 
+function setDom() {
+  const selection = document.getElementById("project-name");
+  selection.innerHTML = "";
+  const projectList = TodoList.getProjectList();
+
+  projectList.forEach((project) => {
+    const option = `<option data-project-uuid="${project.uuid}">${project.title}</option>`;
+    selection.innerHTML += option;
+  });
+}
+
 if (checkStorageAvailability() === true) {
-  setLocalStorage();
+  if (localStorage.length) {
+    setLocalStorage();
+    setDom();
+  }
 }
 
 window.onchange = () => {
+  console.log("hi");
   if (checkStorageAvailability() === true) {
-    storageType(TodoList);
+    setTimeout(() => {
+      storageType(TodoList);
+    }, 1000);
   }
 };
 

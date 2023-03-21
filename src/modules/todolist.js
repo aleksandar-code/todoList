@@ -1,13 +1,14 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { nanoid } from "nanoid";
-// eslint-disable-next-line import/no-cycle
 import Project from "./project";
 import Todo from "./todo";
-// import { checkStorageAvailability, storageType } from "./storage";
 
 class Todolist {
   constructor() {
     this.projectList = [];
+    // setInterval(() => {
+    //   console.log(this);
+    // }, 1000);
   }
 
   // add edit manipulation here
@@ -19,7 +20,6 @@ class Todolist {
 
   setStorage(todolist) {
     this.projectList = [];
-    console.log(JSON.parse(todolist));
     const projects = JSON.parse(todolist);
     projects.projectList.forEach((element) => {
       const newProject = Object.assign(new Project(), element);
@@ -29,10 +29,14 @@ class Todolist {
     console.log(this.projectList);
 
     this.projectList.forEach((element) => {
-      if (!(element.TodoList === undefined)) {
-        element.TodoList.forEach((todo) => {
+      if (!(element.todoList === undefined)) {
+        const todos = element.todoList;
+        element.emptyTodoList();
+        todos.forEach((todo) => {
           const newTodo = Object.assign(new Todo(), todo);
+          console.log(newTodo, "i");
           element.appendTodo(newTodo);
+          console.log(element);
         });
       }
     });

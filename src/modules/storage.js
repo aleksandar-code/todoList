@@ -27,25 +27,11 @@ function storageAvailable(type) {
 
 function populateStorage(element) {
   localStorage.setItem("Todolist", JSON.stringify(element));
-  // const projects = element.projectList;
-
-  // projects.forEach((project, index) => {
-  //   const value = JSON.stringify(project);
-  //   const key = JSON.stringify(index);
-  //   localStorage.setItem(key, value);
-  //   const todos = project.todoList;
-  //   todos.forEach((todo, todoIndex) => {
-  //     const valueTodo = JSON.stringify(todo);
-  //     const keyTodo = JSON.stringify(todoIndex);
-  //     localStorage.setItem(keyTodo, valueTodo);
-  //   });
-  // });
 }
 
 function setStorage() {
-  // how to use the local storage?
-
   const item = localStorage.getItem("Todolist");
+
   return item;
 }
 

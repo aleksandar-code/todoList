@@ -1,9 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { nanoid } from "nanoid";
 import Todo from "./todo";
-// eslint-disable-next-line import/no-cycle
-import TodoList from "./todolist";
-import { checkStorageAvailability, storageType } from "./storage";
 
 class Project {
   constructor(title, uuid) {
@@ -13,6 +10,10 @@ class Project {
   }
 
   // add edit manipulation here
+
+  emptyTodoList() {
+    this.todoList = [];
+  }
 
   createTodo(title, dueDate, description, priority) {
     const projectName = this.title;
@@ -25,11 +26,6 @@ class Project {
       nanoid()
     );
     this.appendTodo(myTodo);
-
-    // store
-    if (checkStorageAvailability() === true) {
-      storageType.call(this, TodoList);
-    }
   }
 
   removeTodo(uuid) {
