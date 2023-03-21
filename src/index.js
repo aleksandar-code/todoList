@@ -25,17 +25,11 @@ if (checkStorageAvailability() === true) {
   }
 }
 
-document.getElementById("todo-box").onclick = () => {
+function triggerLocalStorage() {
   if (checkStorageAvailability() === true) {
     storageType(TodoList);
   }
-};
-
-window.onchange = () => {
-  if (checkStorageAvailability() === true) {
-    storageType(TodoList);
-  }
-};
+}
 
 const setDate = () => {
   const date = document.querySelector("input[type=datetime-local]");
@@ -152,6 +146,7 @@ const addEditListener = (uuid) => {
     showTodoBox();
     viewProject();
     document.getElementById("project-name").style.pointerEvents = "all";
+    triggerLocalStorage();
   };
 };
 
@@ -223,6 +218,7 @@ const viewTodo = (todo) => {
 
   element.lastChild.onclick = (e) => {
     removeTodo(e.composedPath()[1].dataset.todoUuid, e.composedPath()[1]);
+    triggerLocalStorage();
   };
   element.children[8].onclick = (e) => {
     editTodo(e.composedPath()[1].dataset.todoUuid);
@@ -285,6 +281,7 @@ submitButton.addEventListener("click", (e) => {
     viewProject();
   }
   emptyForm();
+  triggerLocalStorage();
 });
 
 const closeFormButton = document.getElementById("close-form");
