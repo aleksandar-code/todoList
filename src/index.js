@@ -107,8 +107,8 @@ const hideTodoBox = () => {
   todoBox.style.display = "none";
 };
 
-const createProjectCard = (project) => {
-  const element = document.createElement("div");
+function createProjectCard(project) {
+  let element = document.createElement("div");
   element.setAttribute("class", "project-card");
   const title = document.createElement("h3");
   title.textContent = project.title;
@@ -118,8 +118,12 @@ const createProjectCard = (project) => {
   removeBtn.textContent = "Remove";
   element.dataset.projectUuid = project.uuid;
   element.appendChild(removeBtn);
+  if (project.title === "Default") {
+    element.remove();
+    element = null;
+  }
   return element;
-};
+}
 
 const createProjectsBox = () => {
   const projectBox = document.createElement("div");
@@ -129,10 +133,15 @@ const createProjectsBox = () => {
   projectBox.appendChild(h2);
   document.getElementById("content").appendChild(projectBox);
   const projectList = TodoList.getProjectList();
-  projectList.forEach((project) => {
-    const card = createProjectCard(project);
-    projectBox.appendChild(card);
-  });
+  if (projectList.length > 2) {
+    projectList.forEach((project) => {
+      const card = createProjectCard(project);
+
+      if (card !== null) {
+        projectBox.appendChild(card);
+      }
+    });
+  }
 };
 let hideForm;
 
