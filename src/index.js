@@ -144,16 +144,28 @@ let hideForm;
 
 const removeProject = (uuid) => {
   TodoList.removeProject(uuid);
-  console.log(TodoList);
   triggerLocalStorage(TodoList);
+};
+
+const removeProjectFromDom = (element) => {
+  const uuid = element.dataset.projectUuid;
+  const projectSelector = document.getElementById("project-name");
+  const array = projectSelector.children;
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i].dataset.projectUuid === uuid) {
+      projectSelector.children[i].remove();
+      element.remove();
+    }
+  }
 };
 
 const addRemoveProjectListener = () => {
   const removeBtns = document.querySelectorAll(".remove-project");
   for (let i = 0; i < removeBtns.length; i += 1) {
     removeBtns[i].onclick = (e) => {
-      console.log(e.composedPath()[1].dataset.projectUuid);
       removeProject(e.composedPath()[1].dataset.projectUuid);
+      removeProjectFromDom(e.composedPath()[1]);
+      triggerLocalStorage();
     };
   }
 };
