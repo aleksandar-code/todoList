@@ -418,9 +418,12 @@ const setRemover = () => {
     const moreInfo2 = document.getElementById("more-info");
 
     moreInfo2.style.pointerEvents = "all";
-
+    document.getElementById("content").style.pointerEvents = "all";
+    document.body.style.backgroundColor = "green";
+    document.querySelector("header").style.background = "#f5b642";
     info.remove();
   };
+  return cancel;
 };
 
 const moreInfo = document.getElementById("more-info");
@@ -428,13 +431,16 @@ moreInfo.addEventListener("click", () => {
   const infoCard = document.createElement("div");
   document.getElementById("content").appendChild(infoCard);
   infoCard.setAttribute("id", "info-card");
-  setRemover();
+  const cancel = setRemover();
   const p = document.createElement("p");
   p.textContent =
     "You can add a todo to whatever project you've previously created using the selector (set on Project: Default). You can create your projects and todos, and both at the same time works! You can select any project and view all the todos you've created for it, you can remove todos and edit them.";
 
   infoCard.appendChild(p);
-  moreInfo.style.pointerEvents = "none";
+  document.getElementById("content").style.pointerEvents = "none";
+  document.body.style.backgroundColor = "gray";
+  document.querySelector("header").style.background = "gray";
+  cancel.style.pointerEvents = "all";
 });
 
 setDate();
