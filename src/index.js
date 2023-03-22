@@ -56,9 +56,8 @@ const createEditForm = (uuid) => {
   const project = getProject();
   const myTodo = project.getTodoWithUuid(uuid);
   const editForm = document.createElement("div");
-  editForm.setAttribute("id", "edit-form");
   document.body.appendChild(editForm);
-
+  editForm.style.pointerEvents = "all";
   const form = document.createElement("form");
 
   form.id = "edit-form";
@@ -114,11 +113,11 @@ function createProjectCard(project) {
   title.textContent = project.title;
   element.appendChild(title);
 
+  element.dataset.projectUuid = project.uuid;
   if (project.title !== "Default") {
     const removeBtn = document.createElement("button");
     removeBtn.setAttribute("class", "remove-project");
     removeBtn.textContent = "Remove";
-    element.dataset.projectUuid = project.uuid;
     element.appendChild(removeBtn);
   }
   return element;
@@ -197,7 +196,7 @@ projectsBtn.addEventListener("click", () => {
 });
 
 const hideProjects = () => {
-  document.getElementById("show-projects").style.pointerEvents = "all";
+  document.getElementById("show-projects").style.pointerEvents = "";
   document.getElementById("midbar").style.display = "flex";
 
   if (document.getElementById("project-box")) {
@@ -205,10 +204,18 @@ const hideProjects = () => {
   }
 };
 
+const replaceProjectPicker = () => {
+  const projectPicker = document.getElementById("midbar");
+
+  const header = document.querySelector("header");
+  header.after(projectPicker);
+};
+
 const todosBtn = document.getElementById("show-todos");
 todosBtn.addEventListener("click", () => {
   hideProjects();
   hideForm();
+  replaceProjectPicker();
 });
 const removeEditForm = () => {
   document.getElementById("edit-form").remove();
@@ -239,7 +246,8 @@ const addEditListener = (uuid) => {
     e.preventDefault();
     removeEditForm();
     showTodoBox();
-    document.getElementById("project-name").style.pointerEvents = "all";
+    replaceProjectPicker();
+    document.querySelector("html").style.pointerEvents = "";
   };
 
   submitEditBtn.onclick = (e) => {
@@ -248,22 +256,28 @@ const addEditListener = (uuid) => {
     removeEditForm();
     showTodoBox();
     viewProject();
-    document.getElementById("project-name").style.pointerEvents = "all";
+    replaceProjectPicker();
+    document.querySelector("html").style.pointerEvents = "";
     triggerLocalStorage();
   };
 };
+const moveProjectPickerIn = (form) => {
+  const projectPicker = document.getElementById("midbar");
+  form.insertBefore(projectPicker, form.firstChild);
+};
 
 const editTodo = (uuid) => {
-  document.getElementById("project-name").style.pointerEvents = "none";
+  document.querySelector("html").style.pointerEvents = "none";
   createEditForm(uuid);
   addEditListener(uuid);
+  moveProjectPickerIn(document.getElementById("edit-form"));
   hideTodoBox();
 };
 // up there edit functionality
 
 hideForm = () => {
   myForm.style.display = "none";
-  document.getElementById("show-form").style.pointerEvents = "all";
+  document.getElementById("show-form").style.pointerEvents = "";
   document.getElementById("show-form").style.backgroundColor = "green";
   showTodoBox();
 };
@@ -274,6 +288,7 @@ showFormBtn.addEventListener("click", () => {
   document.getElementById("show-form").style.pointerEvents = "none";
   hideTodoBox();
   hideProjects();
+  moveProjectPickerIn(document.getElementById("creation-form"));
 });
 
 const appendProjectOptions = () => {
@@ -337,6 +352,13 @@ viewProject = () => {
   todos.forEach((todo) => {
     viewTodo(todo);
   });
+
+  if (!todos.length) {
+    const text = document.createElement("h3");
+    text.textContent = "No todos yet!";
+    text.style.cssText = "color: yellow; font-style: italic;";
+    document.getElementById("todo-box").appendChild(text);
+  }
 };
 
 const formIsComplete = () => {
@@ -378,14 +400,18 @@ submitButton.addEventListener("click", (e) => {
     const name = getProjectValue();
     newProject(name);
     e.preventDefault();
+    viewProject();
+    hideForm();
+    replaceProjectPicker();
   }
   if (formIsComplete() === true) {
     addToProject(e);
     viewProject();
+    hideForm();
+    replaceProjectPicker();
   }
   emptyForm();
   triggerLocalStorage();
-  hideForm();
 });
 
 const closeFormButton = document.getElementById("close-form");
@@ -393,6 +419,7 @@ const closeFormButton = document.getElementById("close-form");
 closeFormButton.addEventListener("click", (e) => {
   e.preventDefault();
   hideForm();
+  replaceProjectPicker();
 });
 
 const projectName = document.getElementById("project-name");
@@ -411,7 +438,7 @@ const setRemover = () => {
   info.appendChild(cancel);
 
   cancel.onclick = () => {
-    document.querySelector("html").style.pointerEvents = "all";
+    document.querySelector("html").style.pointerEvents = "";
     document.body.style.backgroundColor = "green";
     document.querySelector("header").style.background = "#f5b642";
     info.remove();

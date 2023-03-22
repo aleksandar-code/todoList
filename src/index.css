@@ -29,10 +29,11 @@ header {
 }
 
 #more-info {
-  font-size: 2.5rem;
   color: purple;
   font-weight: bold;
   cursor: pointer;
+  position: absolute;
+  right: 10px;
 }
 
 select {
@@ -54,6 +55,7 @@ form {
   padding: 10px;
   width: 220px;
   text-align: center;
+  position: relative;
 }
 
 #edit-form {
@@ -92,7 +94,7 @@ button[type="submit"] {
 }
 
 #project-name {
-  font-size: 2rem;
+  font-size: 1rem;
   color: red;
 }
 
@@ -146,8 +148,8 @@ button[type="submit"] {
 }
 
 #midbar h2 {
-  font-size: 2rem;
   text-align: center;
+  font-size: 1rem;
 }
 
 button {
