@@ -142,7 +142,23 @@ const createProjectsBox = () => {
 };
 let hideForm;
 
+const removeProjectTodos = (uuid) => {
+  const project = TodoList.getProjectWithUuid(uuid);
+  const todos = document.getElementById("todo-box").children;
+
+  const array = project.todoList;
+  array.forEach((todo) => {
+    for (let i = 0; i < todos.length; i += 1) {
+      if (todos[i].dataset.todoUuid === todo.uuid) {
+        document.getElementById("todo-box").children[i].remove();
+      }
+    }
+  });
+  project.emptyTodoList();
+};
+
 const removeProject = (uuid) => {
+  removeProjectTodos(uuid);
   TodoList.removeProject(uuid);
   triggerLocalStorage(TodoList);
 };
