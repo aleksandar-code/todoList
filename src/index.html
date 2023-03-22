@@ -12,8 +12,16 @@
         <button id="show-projects">Projects</button>
         <button id="show-form">Create Todo/Project</button>
         <button id="show-todos">Todos</button>
+
         <div id="more-info">&#9432;</div>
       </header>
+      <div id="midbar">
+        <h2>Project:</h2>
+        <select name="project-list" id="project-name">
+          <option data-project-uuid="">Default</option>
+        </select>
+      </div>
+
       <form id="creation-form" action="" method="post">
         <label for="project-title">New project</label>
         <input
@@ -49,19 +57,6 @@
         <button type="submit">Submit</button>
         <button id="close-form">Cancel</button>
       </form>
-      <div id="midbar">
-        <h2>Project:</h2>
-        <select name="project-list" id="project-name">
-          <option data-project-uuid="">Default</option>
-        </select>
-      </div>
-      <div id="info" style="display: none">
-        You can add a todo to whatever project you've previously created using
-        the selector (set on Project: Default). You can create your projects and
-        todos, and both at the same time works! You can select any project and
-        view all the todos you've created for it, you can remove todos and edit
-        them.
-      </div>
       <div id="todo-box"></div>
     </div>
   </body>

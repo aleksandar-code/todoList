@@ -403,13 +403,38 @@ projectName.onchange = (event) => {
   viewProject();
 };
 
+const setRemover = () => {
+  const info = document.getElementById("info-card");
+  const cancel = document.createElement("li");
+  cancel.textContent = "X";
+  cancel.style.color = "blue";
+  cancel.style.borderRadius = "10px";
+  cancel.style.border = "1px solid black";
+  cancel.style.width = "15px";
+  cancel.style.fontSize = "1.2rem";
+  info.appendChild(cancel);
+
+  cancel.onclick = () => {
+    const moreInfo2 = document.getElementById("more-info");
+
+    moreInfo2.style.pointerEvents = "all";
+
+    info.remove();
+  };
+};
+
 const moreInfo = document.getElementById("more-info");
 moreInfo.addEventListener("click", () => {
-  const p = document.getElementById("info");
-  p.style.display = "block";
-  setTimeout(() => {
-    p.style.display = "none";
-  }, 30000);
+  const infoCard = document.createElement("div");
+  document.getElementById("content").appendChild(infoCard);
+  infoCard.setAttribute("id", "info-card");
+  setRemover();
+  const p = document.createElement("p");
+  p.textContent =
+    "You can add a todo to whatever project you've previously created using the selector (set on Project: Default). You can create your projects and todos, and both at the same time works! You can select any project and view all the todos you've created for it, you can remove todos and edit them.";
+
+  infoCard.appendChild(p);
+  moreInfo.style.pointerEvents = "none";
 });
 
 setDate();

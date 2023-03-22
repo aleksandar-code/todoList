@@ -6,6 +6,8 @@
 
 body {
   min-height: 100vh;
+  background-color: green;
+  color: white;
 }
 
 #content {
@@ -18,10 +20,12 @@ body {
 
 header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20px;
   gap: 10px;
+  background-color: rgb(245, 182, 66);
 }
 
 #more-info {
@@ -35,11 +39,13 @@ select {
   cursor: pointer;
 }
 
+li {
+  list-style: none;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
   font-size: 1rem;
   background-color: rgb(211, 99, 99);
@@ -47,10 +53,23 @@ form {
   font-weight: bold;
   padding: 10px;
   width: 220px;
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+}
+
+#edit-form {
+  display: flex;
+  justify-content: center;
+}
+
+#info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1rem;
+  background-color: rgb(211, 99, 99);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 10px;
+  width: 220px;
 }
 
 button[type="submit"] {
@@ -137,8 +156,8 @@ button {
 }
 
 #show-form {
-  font-size: 1.3rem;
-  padding: 20px;
+  font-size: 1rem;
+  padding: 5px;
   font-weight: bold;
   background-color: green;
   color: white;
@@ -151,8 +170,8 @@ button {
 }
 
 #show-projects {
-  font-size: 1.3rem;
-  padding: 20px;
+  font-size: 1rem;
+  padding: 5px;
   font-weight: bold;
   background-color: green;
   color: white;
@@ -196,8 +215,8 @@ button {
 }
 
 #show-todos {
-  font-size: 1.3rem;
-  padding: 20px;
+  font-size: 1rem;
+  padding: 5px;
   font-weight: bold;
   background-color: green;
   color: white;
