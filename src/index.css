@@ -58,8 +58,7 @@ form {
 }
 
 #edit-form {
-  display: flex;
-  justify-content: center;
+  margin: 10px auto;
 }
 
 #info-card {
