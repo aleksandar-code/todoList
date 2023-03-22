@@ -180,6 +180,8 @@ const addRemoveProjectListener = () => {
     removeBtns[i].onclick = (e) => {
       removeProject(e.composedPath()[1].dataset.projectUuid);
       removeProjectFromDom(e.composedPath()[1]);
+      getProjectUuid.uuid = "Default";
+
       triggerLocalStorage();
     };
   }
@@ -190,6 +192,7 @@ projectsBtn.addEventListener("click", () => {
   createProjectsBox();
   document.getElementById("show-projects").style.pointerEvents = "none";
   document.getElementById("midbar").style.display = "none";
+  document.getElementById("show-todos").style.pointerEvents = "all";
   hideForm();
   hideTodoBox();
   addRemoveProjectListener();
@@ -216,6 +219,7 @@ todosBtn.addEventListener("click", () => {
   hideProjects();
   hideForm();
   replaceProjectPicker();
+  document.getElementById("show-todos").style.pointerEvents = "none";
 });
 const removeEditForm = () => {
   document.getElementById("edit-form").remove();
@@ -244,19 +248,19 @@ const addEditListener = (uuid) => {
 
   cancelEditBtn.onclick = (e) => {
     e.preventDefault();
+    replaceProjectPicker();
     removeEditForm();
     showTodoBox();
-    replaceProjectPicker();
     document.querySelector("html").style.pointerEvents = "";
   };
 
   submitEditBtn.onclick = (e) => {
     e.preventDefault();
+    replaceProjectPicker();
     editValues(uuid);
     removeEditForm();
     showTodoBox();
     viewProject();
-    replaceProjectPicker();
     document.querySelector("html").style.pointerEvents = "";
     triggerLocalStorage();
   };
@@ -289,6 +293,7 @@ showFormBtn.addEventListener("click", () => {
   hideTodoBox();
   hideProjects();
   moveProjectPickerIn(document.getElementById("creation-form"));
+  document.getElementById("show-todos").style.pointerEvents = "";
 });
 
 const appendProjectOptions = () => {
@@ -441,6 +446,8 @@ const setRemover = () => {
     document.querySelector("html").style.pointerEvents = "";
     document.body.style.backgroundColor = "green";
     document.querySelector("header").style.background = "#f5b642";
+    document.getElementById("creation-form").style.display = "flex";
+
     info.remove();
   };
   return cancel;
@@ -448,6 +455,7 @@ const setRemover = () => {
 
 const moreInfo = document.getElementById("more-info");
 moreInfo.addEventListener("click", () => {
+  document.getElementById("creation-form").style.display = "none";
   const infoCard = document.createElement("div");
   document.getElementById("content").appendChild(infoCard);
   infoCard.setAttribute("id", "info-card");
