@@ -234,7 +234,7 @@ const createProjectEditForm = (uuid) => {
   input.value = project.title;
   input.required = true;
   const label = document.createElement("label");
-  label.textContent = "Title";
+  label.textContent = "Change title?";
   const editBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
   editBtn.textContent = "Edit";
