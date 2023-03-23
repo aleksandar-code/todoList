@@ -114,7 +114,7 @@ function createProjectCard(project) {
   element.appendChild(title);
 
   element.dataset.projectUuid = project.uuid;
-  if (project.title !== "Default") {
+  if (project.uuid !== "Default") {
     const removeBtn = document.createElement("button");
     removeBtn.setAttribute("class", "remove-project");
     removeBtn.textContent = "Remove";
