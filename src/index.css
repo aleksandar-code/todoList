@@ -50,13 +50,23 @@ form {
   background-color: rgb(249 176 12);
   color: rgb(0, 0, 0);
   font-weight: bold;
-  padding: 10px;
-  width: 220px;
+  padding: 20px;
+  width: 300px;
   text-align: center;
-  position: relative;
 }
 
 #form-head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-project {
+  background-color: red;
+  color: yellow;
+  font-weight: bold;
+}
+
+#edit-project-form {
   display: flex;
 }
 

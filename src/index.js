@@ -116,9 +116,12 @@ function createProjectCard(project) {
   element.dataset.projectUuid = project.uuid;
   if (project.uuid !== "Default") {
     const removeBtn = document.createElement("button");
+    const editBtn = document.createElement("button");
+    editBtn.setAttribute("class", "edit-project");
     removeBtn.setAttribute("class", "remove-project");
     removeBtn.textContent = "Remove";
-    element.appendChild(removeBtn);
+    editBtn.textContent = "Edit";
+    element.append(editBtn, removeBtn);
   }
   return element;
 }
@@ -187,6 +190,73 @@ const addRemoveProjectListener = () => {
   }
 };
 
+const addListenersToEditProjectForm = (form, uuid) => {
+  form.children[2].addEventListener("click", (e) => {
+    e.preventDefault();
+    const project = TodoList.getProjectWithUuid(uuid);
+    project.title = document.getElementById("new-project-title").value;
+    const array = document.getElementById("project-name").children;
+    for (let i = 0; i < array.length; i += 1) {
+      if (array[i].dataset.projectUuid === uuid) {
+        array[i].textContent = project.title;
+      }
+    }
+
+    const arr = document.getElementById("project-box").children;
+    for (let i = 0; i < arr.length; i += 1) {
+      if (arr[i].dataset.projectUuid === uuid) {
+        arr[i].firstChild.textContent = project.title;
+      }
+    }
+    console.log("submit");
+    form.remove();
+    document.querySelector("html").style.pointerEvents = "";
+    document.getElementById("project-box").style.display = "flex";
+    triggerLocalStorage();
+  });
+
+  form.children[3].addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("cancel");
+    form.remove();
+    document.querySelector("html").style.pointerEvents = "";
+    document.getElementById("project-box").style.display = "flex";
+    triggerLocalStorage();
+  });
+};
+
+const createProjectEditForm = (uuid) => {
+  const form = document.createElement("form");
+  const input = document.createElement("input");
+  input.type = "text";
+  input.id = "new-project-title";
+  const project = TodoList.getProjectWithUuid(uuid);
+  input.value = project.title;
+  input.required = true;
+  const label = document.createElement("label");
+  label.textContent = "Title";
+  const editBtn = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+  editBtn.textContent = "Edit";
+  cancelBtn.textContent = "Cancel";
+  form.append(label, input, editBtn, cancelBtn);
+  form.setAttribute("id", "edit-project-form");
+  document.getElementById("content").appendChild(form);
+  document.getElementById("project-box").style.display = "none";
+  addListenersToEditProjectForm(form, uuid);
+  form.style.pointerEvents = "all";
+};
+
+const addEditProjectListener = () => {
+  const editBtns = document.querySelectorAll(".edit-project");
+  for (let i = 0; i < editBtns.length; i += 1) {
+    editBtns[i].onclick = (e) => {
+      document.querySelector("html").style.pointerEvents = "none";
+      createProjectEditForm(e.composedPath()[1].dataset.projectUuid);
+    };
+  }
+};
+
 const projectsBtn = document.getElementById("show-projects");
 projectsBtn.addEventListener("click", () => {
   createProjectsBox();
@@ -196,6 +266,7 @@ projectsBtn.addEventListener("click", () => {
   hideForm();
   hideTodoBox();
   addRemoveProjectListener();
+  addEditProjectListener();
 });
 
 const hideProjects = () => {
