@@ -292,7 +292,7 @@ showFormBtn.addEventListener("click", () => {
   document.getElementById("show-form").style.pointerEvents = "none";
   hideTodoBox();
   hideProjects();
-  moveProjectPickerIn(document.getElementById("creation-form"));
+  moveProjectPickerIn(document.getElementById("form-head"));
   document.getElementById("show-todos").style.pointerEvents = "";
 });
 
