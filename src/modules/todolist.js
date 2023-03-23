@@ -61,10 +61,23 @@ class Todolist {
     }
     return result;
   }
+
+  getTodoWithUuid(uuid) {
+    const array = this.projectList;
+    let result;
+    array.forEach((project) => {
+      const todos = project.todoList;
+      todos.forEach((todo) => {
+        if (todo.uuid === uuid) {
+          result = todo;
+        }
+      });
+    });
+    return result;
+  }
 }
 
 const TodoList = new Todolist();
-// TodoList.createProject("Default");
 const defaultProject = new Project("Default", "Default");
 TodoList.appendProject(defaultProject);
 export default TodoList;

@@ -16,7 +16,7 @@ class Project {
   }
 
   createTodo(title, dueDate, description, priority) {
-    const projectName = this.title;
+    const projectName = this.uuid;
     const myTodo = new Todo(
       title,
       projectName,

@@ -228,18 +228,24 @@ const removeEditForm = () => {
 let viewProject;
 
 const editValues = (uuid) => {
+  const myTodo = TodoList.getTodoWithUuid(uuid);
   const title = document.getElementById("title-edit").value;
   const priority = document.getElementById("priority-edit").value;
   const dueDate = document.getElementById("due-date-edit").value;
   const description = document.getElementById("description-edit").value;
-
   const project = getProject();
-  const myTodo = project.getTodoWithUuid(uuid);
 
-  myTodo.title = title;
-  myTodo.priority = priority;
-  myTodo.dueDate = dueDate;
-  myTodo.description = description;
+  if (myTodo.projectUuid !== project.uuid) {
+    // move todo to other project
+    const currentProject = TodoList.getProjectWithUuid(myTodo.projectUuid);
+    currentProject.removeTodo(uuid);
+    project.createTodo(title, dueDate, description, priority);
+  } else {
+    myTodo.title = title;
+    myTodo.priority = priority;
+    myTodo.dueDate = dueDate;
+    myTodo.description = description;
+  }
 };
 
 const addEditListener = (uuid) => {
