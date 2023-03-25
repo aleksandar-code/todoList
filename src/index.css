@@ -21,11 +21,32 @@ body {
 header {
   display: flex;
   width: 100%;
-  flex-direction: row;
   justify-content: center;
-  padding: 20px;
-  gap: 10px;
   background-color: #e6e6e2;
+  margin-bottom: 40px;
+}
+
+header div {
+  display: flex;
+  border: none;
+  border-bottom: none;
+  padding: 10px 0px 0px 0px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+header button {
+  font-size: 1rem;
+  padding: 5px;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: none;
+}
+
+header div button.open {
+  background-color: #49498c;
+  color: white;
 }
 
 #more-info {
@@ -172,6 +193,7 @@ button[type="submit"] {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 .todo p {
@@ -220,28 +242,8 @@ button {
   cursor: pointer;
 }
 
-#show-form {
-  font-size: 1rem;
-  padding: 5px;
-  font-weight: bold;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  border-radius: 10px;
-  border: 1px solid black;
-}
-
 #info {
   padding: 10px;
-}
-
-#show-projects {
-  font-size: 1rem;
-  padding: 5px;
-  font-weight: bold;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  border-radius: 10px;
-  border: 1px solid black;
 }
 
 .cancel-info {
@@ -271,6 +273,7 @@ button {
   font-style: italic;
   font-size: 2.5rem;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .project-card {
@@ -300,16 +303,6 @@ button {
   align-self: center;
 }
 
-#show-todos {
-  font-size: 1rem;
-  padding: 5px;
-  font-weight: bold;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  border-radius: 10px;
-  border: 1px solid black;
-}
-
 #submit-edit {
   background-color: #e6e6e2;
   color: black;
@@ -329,20 +322,4 @@ button {
   align-self: center;
   padding: 5px 10px;
   font-size: 1rem;
-}
-
-#show-completed {
-  font-size: 1rem;
-  padding: 5px;
-  font-weight: bold;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  border-radius: 10px;
-  border: 1px solid black;
-}
-
-@media (max-width: 400px) {
-  header {
-    flex-direction: column;
-  }
 }

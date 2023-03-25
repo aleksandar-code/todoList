@@ -549,6 +549,18 @@ setDate();
 
 myForm.style.display = "none";
 
+const headerBtns = document.querySelectorAll("header > div button");
+
+for (let i = 0; i < headerBtns.length; i += 1) {
+  headerBtns[i].addEventListener("click", (e) => {
+    for (let j = 0; j < headerBtns.length; j += 1) {
+      if (headerBtns[j].classList.contains("open"))
+        headerBtns[j].classList.remove("open");
+    }
+    e.target.classList.add("open");
+  });
+}
+
 window.onload = () => {
   viewProject();
 };
