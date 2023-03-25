@@ -582,5 +582,6 @@ for (let i = 0; i < headerBtns.length; i += 1) {
 }
 
 window.onload = () => {
+  document.getElementById("show-todos").click();
   viewProject();
 };
