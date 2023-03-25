@@ -415,9 +415,11 @@ const viewTodo = (todo) => {
   const todoBox = document.getElementById("todo-box");
   element.classList.add("todo");
   element.dataset.todoUuid = todo.getUuid();
-  element.innerHTML = `<span>Title</span><p>${todo.getTitle()}</p><span>Due date</span><p>${
-    todo.dueDate
-  }</p><span>Priority</span><p>${todo.priority}</p><span>Description</span><p>${
+  element.innerHTML = `<span>Title</span><p>${todo.getTitle()}</p>
+  <span>Priority</span><p>${todo.priority}</p>
+  <span>Due date</span><p>${todo.dueDate}</p>
+  <span>Description</span>
+  <p>${
     todo.description
   }</p><button class="edit-todo">Edit/Details</button><button class="remove-todo">Remove</button>`;
 
