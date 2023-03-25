@@ -94,6 +94,14 @@ const createEditForm = (uuid) => {
   <button id="submit-edit">Edit todo</button>
   <button id="cancel-edit">Cancel</button>
 `;
+
+  const priorty = document.querySelector("#edit-form #priority-edit");
+  const array = priorty.children;
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i].value === myTodo.priority) {
+      array[i].selected = true;
+    }
+  }
 };
 
 const showTodoBox = () => {
