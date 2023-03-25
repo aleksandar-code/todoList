@@ -8,8 +8,6 @@ class Todolist {
     this.projectList = [];
   }
 
-  // add edit manipulation here
-
   createProject(title) {
     const project = new Project(title, nanoid());
     this.appendProject(project);

@@ -9,8 +9,6 @@ class Project {
     this.uuid = uuid;
   }
 
-  // add edit manipulation here
-
   emptyTodoList() {
     this.todoList = [];
   }

@@ -53,6 +53,3 @@ function checkStorageAvailability() {
 }
 
 export { checkStorageAvailability, storageType };
-
-// add edit manipulations to the modules and do not do them in index.js
-// decide how to change the data in storage and how to store it

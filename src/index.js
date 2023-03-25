@@ -307,7 +307,6 @@ const editValues = (uuid) => {
   const project = getProject();
 
   if (myTodo.projectUuid !== project.uuid) {
-    // move todo to other project
     const currentProject = TodoList.getProjectWithUuid(myTodo.projectUuid);
     currentProject.removeTodo(uuid);
     project.createTodo(title, dueDate, description, priority);
@@ -354,12 +353,10 @@ const editTodo = (uuid) => {
   moveProjectPickerIn(document.getElementById("edit-form"));
   hideTodoBox();
 };
-// up there edit functionality
 
 hideForm = () => {
   myForm.style.display = "none";
   document.getElementById("show-form").style.pointerEvents = "";
-  document.getElementById("show-form").style.backgroundColor = "green";
   showTodoBox();
 };
 
@@ -521,8 +518,8 @@ const setRemover = () => {
 
   cancel.onclick = () => {
     document.querySelector("html").style.pointerEvents = "";
-    document.body.style.backgroundColor = "green";
-    document.querySelector("header").style.background = "#f5b642";
+    document.body.style.backgroundColor = "#49498C";
+    document.querySelector("header").style.background = "#E6E6E2";
     document.getElementById("creation-form").style.display = "flex";
 
     info.remove();
