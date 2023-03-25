@@ -512,8 +512,12 @@ submitButton.addEventListener("click", (e) => {
     hideForm();
     replaceProjectPicker();
   }
-  emptyForm();
-  triggerLocalStorage();
+
+  if (formIsComplete() === true || projectTitle !== "") {
+    emptyForm();
+    triggerLocalStorage();
+    document.getElementById("show-todos").click();
+  }
 });
 
 const closeFormButton = document.getElementById("close-form");
@@ -522,6 +526,7 @@ closeFormButton.addEventListener("click", (e) => {
   e.preventDefault();
   hideForm();
   replaceProjectPicker();
+  document.getElementById("show-todos").click();
 });
 
 const projectName = document.getElementById("project-name");
