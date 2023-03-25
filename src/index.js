@@ -1,5 +1,5 @@
 import "./index.css";
-import { format } from "date-fns";
+import { format, formatDistanceToNow, parse } from "date-fns";
 import TodoList from "./modules/todolist";
 import { checkStorageAvailability, storageType } from "./modules/storage";
 
@@ -410,14 +410,24 @@ const removeTodo = (uuid, htmlElement) => {
   project.removeTodo(uuid);
 };
 
+const getDateAndDaysLeft = (date) => {
+  const newDate = date.replace("T", "-");
+  const dateObject = parse(newDate, "yyyy-MM-dd-HH:mm", new Date());
+  const result = formatDistanceToNow(dateObject, { addSuffix: true });
+
+  const string = `${newDate} is ${result}`;
+  return string;
+};
+
 const viewTodo = (todo) => {
   const element = document.createElement("div");
   const todoBox = document.getElementById("todo-box");
   element.classList.add("todo");
   element.dataset.todoUuid = todo.getUuid();
+
   element.innerHTML = `<span>Title</span><p>${todo.getTitle()}</p>
   <span>Priority</span><p>${todo.priority}</p>
-  <span>Due date</span><p>${todo.dueDate}</p>
+  <span>Due date</span><p>${getDateAndDaysLeft(todo.dueDate)}</p>
   <span>Description</span>
   <p>${
     todo.description
