@@ -51,7 +51,7 @@ form {
   color: rgb(0, 0, 0);
   font-weight: bold;
   padding: 20px;
-  width: 300px;
+  width: 320px;
   text-align: center;
   border-radius: 10px;
 }
@@ -151,7 +151,7 @@ button[type="submit"] {
   background-color: #9c9dd0;
   color: white;
   height: auto;
-  width: 350px;
+  width: 320px;
   font-size: 1rem;
   padding: 10px;
   gap: 10px;
@@ -260,7 +260,7 @@ button {
 }
 
 #project-box {
-  width: 350px;
+  width: 320px;
   background-color: #9c9dd0;
   display: flex;
   flex-direction: column;
@@ -282,7 +282,7 @@ button {
   justify-content: center;
   font-size: 2rem;
   color: white;
-  gap: 30px;
+  gap: 10px;
   padding: 10px;
   flex-direction: column;
   text-align: center;
@@ -329,4 +329,20 @@ button {
   align-self: center;
   padding: 5px 10px;
   font-size: 1rem;
+}
+
+#show-completed {
+  font-size: 1rem;
+  padding: 5px;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+@media (max-width: 400px) {
+  header {
+    flex-direction: column;
+  }
 }
