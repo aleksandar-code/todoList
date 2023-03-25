@@ -170,8 +170,8 @@ const removeProjectTodos = (uuid) => {
 const removeProject = (uuid) => {
   removeProjectTodos(uuid);
   TodoList.removeProject(uuid);
-  triggerLocalStorage(TodoList);
 };
+let viewProject;
 
 const removeProjectFromDom = (element) => {
   const uuid = element.dataset.projectUuid;
@@ -183,15 +183,17 @@ const removeProjectFromDom = (element) => {
       element.remove();
     }
   }
+  viewProject();
 };
 
 const addRemoveProjectListener = () => {
   const removeBtns = document.querySelectorAll(".remove-project");
+
   for (let i = 0; i < removeBtns.length; i += 1) {
     removeBtns[i].onclick = (e) => {
       removeProject(e.composedPath()[1].dataset.projectUuid);
-      removeProjectFromDom(e.composedPath()[1]);
       getProjectUuid.uuid = "Default";
+      removeProjectFromDom(e.composedPath()[1]);
 
       triggerLocalStorage();
     };
@@ -306,8 +308,6 @@ todosBtn.addEventListener("click", () => {
 const removeEditForm = () => {
   document.getElementById("edit-form").remove();
 };
-
-let viewProject;
 
 const editValues = (uuid) => {
   const myTodo = TodoList.getTodoWithUuid(uuid);
