@@ -247,6 +247,8 @@ const createProjectEditForm = (uuid) => {
   const cancelBtn = document.createElement("button");
   editBtn.textContent = "Edit";
   cancelBtn.textContent = "Cancel";
+  editBtn.setAttribute("id", "edit-project-btn");
+  cancelBtn.setAttribute("id", "cancel-edit-project-btn");
   form.append(label, input, editBtn, cancelBtn);
   form.setAttribute("id", "edit-project-form");
   document.getElementById("content").appendChild(form);
@@ -257,6 +259,7 @@ const createProjectEditForm = (uuid) => {
 
 const addEditProjectListener = () => {
   const editBtns = document.querySelectorAll(".edit-project");
+
   for (let i = 0; i < editBtns.length; i += 1) {
     editBtns[i].onclick = (e) => {
       document.querySelector("html").style.pointerEvents = "none";

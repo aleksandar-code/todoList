@@ -109,6 +109,30 @@ form input:focus {
   display: flex;
 }
 
+#edit-project-btn {
+  background-color: #e6e6e2;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 1rem;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+  align-self: center;
+}
+
+#cancel-edit-project-btn {
+  background-color: rgb(0, 0, 0);
+  color: yellow;
+  font-weight: bold;
+  width: fit-content;
+  align-self: center;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
 #edit-form {
   margin: 10px auto;
 }
@@ -163,7 +187,9 @@ button[type="submit"] {
   font-weight: bold;
   border-radius: 10px;
   border: none;
+  width: 140px;
   padding: 5px;
+  margin: 5px;
 }
 
 .todo {
@@ -181,6 +207,11 @@ button[type="submit"] {
 
 .todo p {
   display: block;
+  overflow-wrap: break-word;
+}
+
+h3 {
+  overflow-wrap: break-word;
 }
 
 .todo span {
